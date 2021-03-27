@@ -13,4 +13,10 @@ const weatherDesc = document.getElementById("today-weather-desc")
 navigator.geolocation.getCurrentPosition(function(position) {
     let lat = position.coords.latitude; //current location latitude
     let long = position.coords.longitude; //current location longitude
+    //calling the (One call API) from Open weather map
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${apiKey}`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+        })
 })
