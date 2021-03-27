@@ -27,12 +27,19 @@ navigator.geolocation.getCurrentPosition(function(position) {
                     //write the min temp
                 minTemp.textContent = Math.round(data["daily"][0]["temp"]["night"] - 273.15)
 
-                //Calling (Current Weather Data) API from OpenWeatherMap to get the current temp, weather icon and weather description
+                //Calling (Current Weather Data) API from OpenWeatherMap by the city name to get the current temp, weather icon and weather description
                 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${remContinentName(timezone)}&appid=${apiKey}`)
                     .then((cityResponse) => cityResponse.json())
                     .then((cityData) => {
                         console.log(cityData)
 
+                        //Get the weather icon
+                        weatherIcon.innerHTML = `<img  
+                        src="//openweathermap.org/img/wn/${cityData["weather"][0]["icon"]}@2x.png">`
+                            //write current weather description
+                        weatherDesc.textContent = cityData["weather"][0]["description"];
+                        //write current temperature
+                        currentTemp.textContent = Math.round(cityData["main"]["temp"] - 273.15)
                     })
 
             })
