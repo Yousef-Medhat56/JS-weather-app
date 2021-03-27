@@ -8,3 +8,9 @@ const maxTemp = document.getElementById("max-temp")
 const minTemp = document.getElementById("min-temp")
 const weatherIcon = document.getElementById("today-weather-icon")
 const weatherDesc = document.getElementById("today-weather-desc")
+
+//Getting the current location coordinates
+navigator.geolocation.getCurrentPosition(function(position) {
+    let lat = position.coords.latitude; //current location latitude
+    let long = position.coords.longitude; //current location longitude
+})
