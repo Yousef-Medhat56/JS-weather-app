@@ -18,5 +18,13 @@ navigator.geolocation.getCurrentPosition(function(position) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
+
+            //write the timezone name
+            let timezone = data["timezone"]
+            locationName.textContent = remContinentName(timezone)
+                //write the max temp
+            maxTemp.textContent = Math.round(data["daily"][0]["temp"]["day"] - 273.15)
+                //write the min temp
+            minTemp.textContent = Math.round(data["daily"][0]["temp"]["night"] - 273.15)
         })
 })
