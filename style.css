@@ -13,7 +13,7 @@
 :root {
     --light-blue: #469DE6;
     --dark-blue: #161623;
-    --wight: #f2f2f1;
+    --white: #f2f2f1;
 }
 
 
@@ -53,7 +53,7 @@
 
 #information-bar-location h3 {
     font-size: 2em;
-    color: var(--wight)
+    color: var(--white)
 }
 
 #information-bar-location h3 i {
@@ -97,7 +97,7 @@
     height: 15vh;
     width: 100%;
     margin: 0 auto;
-    color: var(--wight);
+    color: var(--white);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -136,9 +136,57 @@
 /*Today weather Information | today name*/
 
 #today-name {
-    color: var(--wight);
+    color: var(--white);
     font-size: 1.5em;
     font-weight: 500;
     letter-spacing: 1px;
     margin-top: 30px;
+}
+
+
+/*Weather forecast for the next week*/
+
+
+/*weather forecast container*/
+
+.weather-forecast {
+    order: 2;
+    height: 22vh;
+    width: 100%;
+    margin-bottom: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/*weather forecast container | Side Buttons*/
+
+.weather-forecast button {
+    width: 5%;
+    height: 80%;
+    background: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.weather-forecast button:hover {
+    background-color: var(--white);
+}
+
+
+/*weather forecast container | Side Buttons | Icons*/
+
+.weather-forecast button i {
+    font-size: 1.8em;
+    color: var(--white)
+}
+
+.weather-forecast button:hover i {
+    color: var(--dark-blue)
 }
