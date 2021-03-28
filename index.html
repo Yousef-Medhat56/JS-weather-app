@@ -21,9 +21,9 @@
         <section class="information-bar">
             <div id="information-bar-location">
                 <!--Loctaion Icon-->
-                <i class="fas fa-map-marker-alt"></i>
+
                 <!--Loctaion Name-->
-                <h3 id="location-name">Zagazig</h3>
+                <h3><i class="fas fa-map-marker-alt"></i><span id="location-name"></span></h3>
             </div>
         </section>
         <!--Today Weather -->
@@ -34,14 +34,16 @@
 
             <!--Today weather Information-->
             <div id="today-weather-info">
-                <!--Today weather Information| Temperature-->
-                <div id="today-weather-temp">
-                    <div id="current-temp"><span>20</span><span>&#8451;</span></div>
-                    <div id="max-min-temp"><span>30/9</span><span>&#8451;</span></div>
-                </div>
 
                 <!--Today weather Information| weather description-->
-                <div id="today-weather-desc">Clear</div>
+                <div id="today-weather-desc"></div>
+
+                <!--Today weather Information| Temperature-->
+                <div id="today-weather-temp">
+                    <div id="current-temp"><span id="current-temp-span"></span><span>&#8451;</span></div>
+                    <div id="max-min-temp"><span id="max-temp"></span>/<span id="min-temp"></span><span>&#8451;</span></div>
+                </div>
+
             </div>
             <div id="today-name">
                 <snap>Thursday</snap>
