@@ -63,7 +63,7 @@ let remContinentName = (timezone) => {
         }
     }
 }
-<<<<<<< HEAD
+
 
 //turning the weather forecast to left 
 let turnLeft = () => {
@@ -79,5 +79,19 @@ let turnRight = () => {
     firstHalf.style.left = "5%"
     secondHalf.style.left = "105%"
 }
-=======
->>>>>>> 57f5bdab8dce20db648f6dffe2fbea175a20a044
+
+//creating weekdays Divs in week forecast
+let createWeekDays = (halfWeekOrder, numOfDays) => {
+    for (let x = 0; x < numOfDays; x++) {
+        halfWeekOrder.innerHTML += `<div class="weekday-weather">
+        <div class="weekday-weather-icon"></div>
+        <div class="weekday-weather-info">
+            <span class="weekday-name"></span>
+            <span class="weekday-date"></span>
+            <span class="weekday-max-min-temp"></span>
+        </div>`
+    }
+}
+
+createWeekDays(firstHalf, 4) //create 4 days for the first half of the week forecast
+createWeekDays(secondHalf, 3) //create 3 days for the first half of the week forecast
