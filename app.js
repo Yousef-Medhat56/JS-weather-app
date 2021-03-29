@@ -1,4 +1,4 @@
-//Open Weather map API key
+//OpenWeatherMap API key
 const apiKey = "c1175134deb4968fd0eaf3b28c9d9ed2"
 
 //HTML elements
@@ -23,7 +23,7 @@ const secondHalf = document.getElementById("second-half-week")
 navigator.geolocation.getCurrentPosition(function(position) {
         let lat = position.coords.latitude; //current location latitude
         let long = position.coords.longitude; //current location longitude
-        //calling the (One call API) from Open weather map
+        //calling the (One call API) from OpenWeatherMap
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${apiKey}`)
             .then((response) => response.json())
             .then((data) => {
@@ -63,6 +63,7 @@ let remContinentName = (timezone) => {
         }
     }
 }
+<<<<<<< HEAD
 
 //turning the weather forecast to left 
 let turnLeft = () => {
@@ -78,3 +79,5 @@ let turnRight = () => {
     firstHalf.style.left = "5%"
     secondHalf.style.left = "105%"
 }
+=======
+>>>>>>> 57f5bdab8dce20db648f6dffe2fbea175a20a044
