@@ -2,12 +2,22 @@
 const apiKey = "c1175134deb4968fd0eaf3b28c9d9ed2"
 
 //HTML elements
+//HTML elements | location name
 const locationName = document.getElementById("location-name")
-const currentTemp = document.getElementById("current-temp")
-const maxTemp = document.getElementById("max-temp")
-const minTemp = document.getElementById("min-temp")
+    //HTML elements | temperature
+const currentTemp = document.getElementById("current-temp-span")
+const maxTemp = document.getElementById("max-temp-span")
+const minTemp = document.getElementById("min-temp-span")
+    //HTML elements | weather icon
 const weatherIcon = document.getElementById("today-weather-icon")
+    //HTML elements | weather description
 const weatherDesc = document.getElementById("today-weather-desc")
+    //HTML elements | turn left and right buttons
+const turnRightBtn = document.getElementById("turn-right-btn")
+const turnLeftBtn = document.getElementById("turn-left-btn")
+    //HTML elements | week forecast
+const firstHalf = document.getElementById("first-half-week")
+const secondHalf = document.getElementById("second-half-week")
 
 //Getting the current location coordinates
 navigator.geolocation.getCurrentPosition(function(position) {
@@ -52,4 +62,19 @@ let remContinentName = (timezone) => {
             return timezone.substring(x + 1)
         }
     }
+}
+
+//turning the weather forecast to left 
+let turnLeft = () => {
+        turnLeftBtn.style.visibility = "hidden"
+        turnRightBtn.style.visibility = "visible"
+        firstHalf.style.left = "-105%"
+        secondHalf.style.left = "5%"
+    }
+    //turning the weather forecast to right 
+let turnRight = () => {
+    turnLeftBtn.style.visibility = "visible"
+    turnRightBtn.style.visibility = "hidden"
+    firstHalf.style.left = "5%"
+    secondHalf.style.left = "105%"
 }
