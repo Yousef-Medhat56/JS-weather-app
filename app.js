@@ -35,8 +35,12 @@ navigator.geolocation.getCurrentPosition(function(position) {
                 //get maximum temperatures
                 getMaxMinTemp(maxTemp, "day", data)
 
+
                 //get minimum temperatures
                 getMaxMinTemp(minTemp, "night", data)
+
+                //get weekdays names
+                getDaysName(data)
 
                 //write the timezone name
                 locationName.textContent = remContinentName(data["timezone"])
@@ -104,7 +108,7 @@ createWeekDays(secondHalf, 3) //create 3 days for the first half of the week for
 //get the weather icons of the next week
 function getWeatherIcons(weekWeatherApi) {
     let weatherIcons = document.getElementsByClassName("weekday-weather-icon")
-    for (x = 0; x < weatherIcons.length; x++) {
+    for (let x = 0; x < weatherIcons.length; x++) {
         weatherIcons[x].innerHTML = `<img  
         src="//openweathermap.org/img/wn/${weekWeatherApi["daily"][x+1]["weather"][0]["icon"]}@2x.png">`
     }
@@ -112,7 +116,19 @@ function getWeatherIcons(weekWeatherApi) {
 
 //Get max and min temperature 
 function getMaxMinTemp(tempType, time, weekWeatherApi) {
-    for (x = 0; x < tempType.length; x++) {
+    for (let x = 0; x < tempType.length; x++) {
         tempType[x].textContent = Math.round(weekWeatherApi["daily"][x]["temp"][time] - 273.15)
+    }
+}
+
+//get weekdays name
+function getDaysName(weekWeatherApi) {
+    let weekdaysOrder = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    let weekdaysName = document.getElementsByClassName("weekday-name")
+
+    let milliseconds;
+    for (let x = 0; x < weekdaysName.length; x++) {
+        milliseconds = (weekWeatherApi["daily"][x]["dt"] * 1000) //convert seconds to milliseconds
+        weekdaysName[x].textContent = weekdaysOrder[new Date(milliseconds).getDay()]
     }
 }
