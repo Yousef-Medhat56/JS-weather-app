@@ -6,8 +6,8 @@ const apiKey = "c1175134deb4968fd0eaf3b28c9d9ed2"
 const locationName = document.getElementById("location-name")
     //HTML elements | temperature
 const currentTemp = document.getElementById("current-temp-span")
-const maxTemp = document.getElementById("max-temp-span")
-const minTemp = document.getElementById("min-temp-span")
+const maxTemp = document.getElementsByClassName("max-temp-span")
+const minTemp = document.getElementsByClassName("min-temp-span")
     //HTML elements | weather icon
 const weatherIcon = document.getElementById("today-weather-icon")
     //HTML elements | weather description
@@ -32,15 +32,17 @@ navigator.geolocation.getCurrentPosition(function(position) {
                 //get the weather icons of the next week
                 getWeatherIcons(data)
 
+                //get maximum temperatures
+                getMaxMinTemp(maxTemp, "day", data)
+
+                //get minimum temperatures
+                getMaxMinTemp(minTemp, "night", data)
+
                 //write the timezone name
                 locationName.textContent = remContinentName(data["timezone"])
-                    //write the max temp
-                maxTemp.textContent = Math.round(data["daily"][0]["temp"]["day"] - 273.15)
-                    //write the min temp
-                minTemp.textContent = Math.round(data["daily"][0]["temp"]["night"] - 273.15)
 
                 //Calling (Current Weather Data) API from OpenWeatherMap by the city name to get the current temp, weather icon and weather description
-                fetch(`https://api.openweathermap.org/data/2.5/weather?q=${remContinentName(timezone)}&appid=${apiKey}`)
+                fetch(`https://api.openweathermap.org/data/2.5/weather?q=${remContinentName(data["timezone"])}&appid=${apiKey}`)
                     .then((cityResponse) => cityResponse.json())
                     .then((cityData) => {
                         console.log(cityData)
@@ -48,7 +50,8 @@ navigator.geolocation.getCurrentPosition(function(position) {
                         //Get the current weather icon
                         weatherIcon.innerHTML = `<img  
                         src="//openweathermap.org/img/wn/${cityData["weather"][0]["icon"]}@2x.png">`
-                            //write current weather description
+
+                        //write current weather description
                         weatherDesc.textContent = cityData["weather"][0]["description"];
                         //write current temperature
                         currentTemp.textContent = Math.round(cityData["main"]["temp"] - 273.15)
@@ -90,7 +93,7 @@ let createWeekDays = (halfWeekOrder, numOfDays) => {
         <div class="weekday-weather-info">
             <span class="weekday-name"></span>
             <span class="weekday-date"></span>
-            <span class="weekday-max-min-temp"></span>
+            <div class="weekday-max-min-temp"><span class ="max-temp-span"></span>/<span class ="min-temp-span"></span><span>&#8451;</span></div>
         </div>`
     }
 }
@@ -104,5 +107,12 @@ function getWeatherIcons(weekWeatherApi) {
     for (x = 0; x < weatherIcons.length; x++) {
         weatherIcons[x].innerHTML = `<img  
         src="//openweathermap.org/img/wn/${weekWeatherApi["daily"][x+1]["weather"][0]["icon"]}@2x.png">`
+    }
+}
+
+//Get max and min temperature 
+function getMaxMinTemp(tempType, time, weekWeatherApi) {
+    for (x = 0; x < tempType.length; x++) {
+        tempType[x].textContent = Math.round(weekWeatherApi["daily"][x]["temp"][time] - 273.15)
     }
 }
