@@ -29,9 +29,11 @@ navigator.geolocation.getCurrentPosition(function(position) {
             .then((data) => {
                 console.log(data)
 
+                //get the weather icons of the next week
+                getWeatherIcons(data)
+
                 //write the timezone name
-                let timezone = data["timezone"]
-                locationName.textContent = remContinentName(timezone)
+                locationName.textContent = remContinentName(data["timezone"])
                     //write the max temp
                 maxTemp.textContent = Math.round(data["daily"][0]["temp"]["day"] - 273.15)
                     //write the min temp
@@ -43,7 +45,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
                     .then((cityData) => {
                         console.log(cityData)
 
-                        //Get the weather icon
+                        //Get the current weather icon
                         weatherIcon.innerHTML = `<img  
                         src="//openweathermap.org/img/wn/${cityData["weather"][0]["icon"]}@2x.png">`
                             //write current weather description
@@ -95,3 +97,12 @@ let createWeekDays = (halfWeekOrder, numOfDays) => {
 
 createWeekDays(firstHalf, 4) //create 4 days for the first half of the week forecast
 createWeekDays(secondHalf, 3) //create 3 days for the first half of the week forecast
+
+//get the weather icons of the next week
+function getWeatherIcons(weekWeatherApi) {
+    let weatherIcons = document.getElementsByClassName("weekday-weather-icon")
+    for (x = 0; x < weatherIcons.length; x++) {
+        weatherIcons[x].innerHTML = `<img  
+        src="//openweathermap.org/img/wn/${weekWeatherApi["daily"][x+1]["weather"][0]["icon"]}@2x.png">`
+    }
+}
