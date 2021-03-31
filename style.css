@@ -159,6 +159,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: rgb(0, 0, 0, 0.1);
+}
+
+
+/*weather forecast container | upper and lower border*/
+
+.weather-forecast:before,
+.weather-forecast:after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: rgb(255, 255, 255, 0.1)
+}
+
+.weather-forecast:before {
+    top: 0;
+}
+
+.weather-forecast:after {
+    bottom: 0;
 }
 
 
@@ -213,7 +234,7 @@
     display: flex;
     align-items: row;
     justify-content: space-between;
-    transition: all 1s ease;
+    transition: all 0.8s ease;
 }
 
 
@@ -221,7 +242,6 @@
 
 #first-half-week {
     left: 5%;
-    background: #469DE6;
 }
 
 
@@ -229,7 +249,6 @@
 
 #second-half-week {
     left: 105%;
-    background: #161623;
 }
 
 
@@ -265,6 +284,8 @@
     width: 50%;
     height: 90%;
     display: flex;
+    align-items: center;
+    flex-direction: column;
     justify-content: space-around;
 }
 
@@ -274,4 +295,11 @@
 .weekday-max-min-temp {
     font-size: 1em;
     letter-spacing: 2px;
+}
+
+
+/*weather forecast container |day container | day info| weekdays name*/
+
+.weekday-weather-info .weekday-name {
+    font-size: 1em;
 }
