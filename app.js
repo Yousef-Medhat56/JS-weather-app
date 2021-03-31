@@ -40,10 +40,12 @@ navigator.geolocation.getCurrentPosition(function(position) {
                 getMaxMinTemp(minTemp, "night", data)
 
                 //get weekdays names
-                getDaysName(data)
+                writeDaysName(data)
 
                 //get weekday date in the week forecast
-                getDaysDate(data)
+                writeDaysDate(data)
+
+                writeMonName(data)
 
                 //write the timezone name
                 locationName.textContent = remContinentName(data["timezone"])
@@ -124,24 +126,6 @@ function getMaxMinTemp(tempType, time, weekWeatherApi) {
     }
 }
 
-//write weekdays name
-function getDaysName(weekWeatherApi) {
-    let weekdaysName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    let weekdaysNamesSpans = document.getElementsByClassName("weekday-name")
-
-    for (let x = 0; x < weekdaysNamesSpans.length; x++) {
-        weekdaysNamesSpans[x].textContent = weekdaysName[makeDateArr(weekWeatherApi)[x].getDay()]
-    }
-}
-
-//write weekday date in the week forecast
-function getDaysDate(weekWeatherApi) {
-    let weekdaysDate = document.getElementsByClassName("weekday-date-num")
-    for (let x = 0; x < weekdaysDate.length; x++) {
-        weekdaysDate[x].textContent = makeDateArr(weekWeatherApi)[x + 1].getDate()
-    }
-}
-
 //collect the date info of all the days in a one array
 function makeDateArr(weekWeatherApi) {
     let milliseconds;
@@ -151,4 +135,32 @@ function makeDateArr(weekWeatherApi) {
         dateArr.push(new Date(milliseconds)) //add each day date to the array
     }
     return dateArr
+}
+
+//write weekdays name
+function writeDaysName(weekWeatherApi) {
+    let weekdaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let weekdaysNamesSpans = document.getElementsByClassName("weekday-name")
+
+    for (let x = 0; x < weekdaysNamesSpans.length; x++) {
+        weekdaysNamesSpans[x].textContent = weekdaysName[makeDateArr(weekWeatherApi)[x].getDay()]
+    }
+}
+
+//write weekday date in the week forecast
+function writeDaysDate(weekWeatherApi) {
+    let weekdaysDate = document.getElementsByClassName("weekday-date-num")
+    for (let x = 0; x < weekdaysDate.length; x++) {
+        weekdaysDate[x].textContent = `${makeDateArr(weekWeatherApi)[x + 1].getDate()} `
+    }
+}
+
+//write month name in the forecast
+function writeMonName(weekWeatherApi) {
+    let monNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    let monNameSpans = document.getElementsByClassName("weekday-date-month")
+
+    for (let x = 0; x < monNameSpans.length; x++) {
+        monNameSpans[x].textContent = monNames[makeDateArr(weekWeatherApi)[x + 1].getMonth()]
+    }
 }
