@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!--Style-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../JS-weather-app/CSS/style.css">
     <!--Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
@@ -41,25 +41,25 @@
                 <!--Today weather Information| Temperature-->
                 <div id="today-weather-temp">
                     <div id="current-temp"><span id="current-temp-span"></span><span>&#8451;</span></div>
-                    <div id="max-min-temp"><span id="max-temp"></span>/<span id="min-temp"></span><span>&#8451;</span></div>
+                    <div id="max-min-temp-span"><span class="max-temp-span"></span>/<span class="min-temp-span"></span><span>&#8451;</span></div>
                 </div>
 
             </div>
             <div id="today-name">
-                <snap>Thursday</snap>
+                <snap class="weekday-name"></snap>
             </div>
             </div>
         </section>
 
         <!--Weather forecast for the next week-->
         <section class="weather-forecast">
-            <button id="turn-left"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="turnLeft()" id="turn-left-btn"><i class="fas fa-chevron-left"></i></button>
             <div id="first-half-week"></div>
             <div id="second-half-week"></div>
-            <button id="turn-right"><i class="fas fa-chevron-right"></i></button>
+            <button onclick="turnRight()" id="turn-right-btn"><i class="fas fa-chevron-right"></i></button>
         </section>
     </section>
-    <script src="app.js"></script>
+    <script src="../JS-weather-app/JavaScript/app.js"></script>
 </body>
 
 </html>
