@@ -16,3 +16,17 @@ let makeCitiesArr = () => {
 
     })
 }
+
+//make array of choices that appear for the user 
+let makeChoicesArr = () => {
+    //filtering the cities array to make choices array
+    if (searchCity.value.length > 0) {
+        citiesChoiceArr = citiesArr.filter(value => (value.toLowerCase()).startsWith(searchCity.value.toLowerCase()))
+    }
+
+}
+
+makeCitiesArr()
+
+//make a new array of choices by entering new letters
+searchCity.addEventListener("keyup", makeChoicesArr)
