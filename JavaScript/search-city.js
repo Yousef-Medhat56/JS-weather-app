@@ -28,12 +28,21 @@ let makeChoicesArr = () => {
 
 }
 
+//bluring all the DIVs except the search bar and its options during searching
+
+let blurDiv = (blurValue) => {
+    for (let x = 0; document.querySelectorAll("div").length > x; x++) {
+        document.querySelectorAll("div")[x].style.filter = blurValue
+    }
+    document.querySelector("#search-city").style.filter = "none"
+}
 
 //showing the cities choices 
 let showChoicesArr = () => {
 
     //remove the choices container elements  
     citiesChoicesUL.innerHTML = ""
+    blurDiv("none") //cancel the blur effect if the search bar is empty
 
     //create li elements and add city names to them
     let createLiElement = (maxLength) => {
@@ -45,18 +54,20 @@ let showChoicesArr = () => {
     //showing 5 choices only as maximum
     if (citiesChoiceArr.length > 5 && searchCity.value.length != 0) {
         createLiElement(5)
+        blurDiv("blur(3px)") //add blur effects to all the page except the search bar
 
     }
 
     //showing choices of all the values in the (citiesChoiceArr)
     else if (citiesChoiceArr.length < 5 && searchCity.value.length != 0) {
         createLiElement(citiesChoiceArr.length)
+        blurDiv("blur(3px)") //add blur effects to all the page except the search bar
 
     }
 
 }
 
-makeCitiesArr()
+makeCitiesArr() //make array for all the cities in (city-names.json)
 
 //make a new array of choices by entering new letters
 searchCity.addEventListener("keyup", () => {
