@@ -21,21 +21,23 @@ const secondHalf = document.getElementById("second-half-week")
 
 //Getting the current location coordinates
 navigator.geolocation.getCurrentPosition(function(position) {
-        let lat = position.coords.latitude; //current location latitude
-        let long = position.coords.longitude; //current location longitude
-        //calling the (5 Day / 3 Hour Forecast)API from OpenWeatherMap
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
+    let lat = position.coords.latitude; //current location latitude
+    let long = position.coords.longitude; //current location longitude
+    //calling the (5 Day / 3 Hour Forecast)API from OpenWeatherMap
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
 
+            //Removing the data of the current day from the (5 Day / 3 Hour Forecast)API
+            rmTodayData(data)
 
+            console.log(data.list)
+        })
+})
 
-
-            })
-    })
-    //Functions
-    //Removing the continent name from the timezone in the api to get the city name only
+//Functions
+//Removing the continent name from the timezone in the api to get the city name only
 let remContinentName = (timezone) => {
     for (let x = 0; x < timezone.length; x++) {
         if (timezone[x] == "/") {
@@ -128,5 +130,23 @@ function writeMonName(weekWeatherApi) {
 
     for (let x = 0; x < monNameSpans.length; x++) {
         monNameSpans[x].textContent = monNames[makeDateArr(weekWeatherApi)[x + 1].getMonth()]
+    }
+}
+
+//Removing the data of the current day from the (5 Day / 3 Hour Forecast)API
+function rmTodayData(data) {
+    for (let x = 0; x < 1; x++) {
+
+        //elements that contains the current day data
+        let currentDateApi = new Date((data.list[x].dt) * 1000).getDay()
+
+        //the current day date
+        let currentDate = new Date().getDay()
+
+        //if the date of the elements equal the date of the current day
+        if (currentDateApi == currentDate) {
+            data.list.shift() //remove that elements
+            x-- //return x value again to 0
+        }
     }
 }
