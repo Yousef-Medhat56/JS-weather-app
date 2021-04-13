@@ -23,48 +23,14 @@ const secondHalf = document.getElementById("second-half-week")
 navigator.geolocation.getCurrentPosition(function(position) {
         let lat = position.coords.latitude; //current location latitude
         let long = position.coords.longitude; //current location longitude
-        //calling the (One call API) from OpenWeatherMap
-        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${apiKey}`)
+        //calling the (5 Day / 3 Hour Forecast)API from OpenWeatherMap
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
 
-                //get the weather icons of the next week
-                getWeatherIcons(data)
-
-                //get maximum temperatures
-                getMaxMinTemp(maxTemp, "day", data)
 
 
-                //get minimum temperatures
-                getMaxMinTemp(minTemp, "night", data)
-
-                //get weekdays names
-                writeDaysName(data)
-
-                //get weekday date in the week forecast
-                writeDaysDate(data)
-
-                writeMonName(data)
-
-                //write the timezone name
-                locationName.textContent = remContinentName(data["timezone"])
-
-                //Calling (Current Weather Data) API from OpenWeatherMap by the city name to get the current temp, weather icon and weather description
-                fetch(`https://api.openweathermap.org/data/2.5/weather?q=${remContinentName(data["timezone"])}&appid=${apiKey}`)
-                    .then((cityResponse) => cityResponse.json())
-                    .then((cityData) => {
-                        console.log(cityData)
-
-                        //Get the current weather icon
-                        weatherIcon.innerHTML = `<img  
-                        src="https://openweathermap.org/img/wn/${cityData["weather"][0]["icon"]}@2x.png">`
-
-                        //write current weather description
-                        weatherDesc.textContent = cityData["weather"][0]["description"];
-                        //write current temperature
-                        currentTemp.textContent = Math.round(cityData["main"]["temp"] - 273.15)
-                    })
 
             })
     })
