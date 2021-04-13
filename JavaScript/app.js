@@ -21,23 +21,41 @@ const secondHalf = document.getElementById("second-half-week")
 
 //Getting the current location coordinates
 navigator.geolocation.getCurrentPosition(function(position) {
-    let lat = position.coords.latitude; //current location latitude
-    let long = position.coords.longitude; //current location longitude
-    //calling the (5 Day / 3 Hour Forecast)API from OpenWeatherMap
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
+        let lat = position.coords.latitude; //current location latitude
+        let long = position.coords.longitude; //current location longitude
 
-            //Removing the data of the current day from the (5 Day / 3 Hour Forecast)API
-            rmTodayData(data)
+        //calling the (5 Day / 3 Hour Forecast)API from OpenWeatherMap
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
 
-            console.log(data.list)
-        })
-})
+                //Remove the data of the current day from the (5 Day / 3 Hour Forecast)API
+                rmTodayData(data)
 
-//Functions
-//Removing the continent name from the timezone in the api to get the city name only
+                console.log(data.list)
+
+                //Maximum temperatures container
+                let MaxTempsObj = new Object
+                collectMaxMinTemps(MaxTempsObj, data, "temp_max")
+
+                //Minimum temperatures container
+                let MinTempsObj = new Object
+                collectMaxMinTemps(MinTempsObj, data, "temp_min")
+
+
+
+                console.log(MaxTempsObj)
+                console.log(MinTempsObj)
+
+
+
+
+
+            })
+    })
+    //Functions
+    //Removing the continent name from the timezone in the api to get the city name only
 let remContinentName = (timezone) => {
     for (let x = 0; x < timezone.length; x++) {
         if (timezone[x] == "/") {
@@ -87,12 +105,7 @@ function getWeatherIcons(weekWeatherApi) {
     }
 }
 
-//Get max and min temperature 
-function getMaxMinTemp(tempType, time, weekWeatherApi) {
-    for (let x = 0; x < tempType.length; x++) {
-        tempType[x].textContent = Math.round(weekWeatherApi["daily"][x]["temp"][time] - 273.15)
-    }
-}
+
 
 //collect the date info of all the days in a one array
 function makeDateArr(weekWeatherApi) {
@@ -133,7 +146,7 @@ function writeMonName(weekWeatherApi) {
     }
 }
 
-//Removing the data of the current day from the (5 Day / 3 Hour Forecast)API
+//Remove the data of the current day from the (5 Day / 3 Hour Forecast)API
 function rmTodayData(data) {
     for (let x = 0; x < 1; x++) {
 
@@ -147,6 +160,19 @@ function rmTodayData(data) {
         if (currentDateApi == currentDate) {
             data.list.shift() //remove that elements
             x-- //return x value again to 0
+        }
+    }
+}
+
+
+//collect the maximum and minimum temperatures during all the parts of the day for the next 4 days
+function collectMaxMinTemps(object, data, tempType) {
+    for (let dayIndex = 0; dayIndex < 4; dayIndex++) {
+        //add new property to the empty object that represent the maximum or minimum temps during one day only
+        object[`day${dayIndex}`] = new Array()
+        for (let threeHoursIndex = 0; threeHoursIndex < 8; threeHoursIndex++) {
+            //add the maximum or the minimum temps of each part of the day to the object
+            object[`day${dayIndex}`].push(data.list[(dayIndex + threeHoursIndex) + (dayIndex * 7)]["main"][tempType])
         }
     }
 }
