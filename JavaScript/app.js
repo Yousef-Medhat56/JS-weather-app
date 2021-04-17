@@ -21,45 +21,39 @@ const secondHalf = document.getElementById("second-half-week")
 
 //Getting the current location coordinates
 navigator.geolocation.getCurrentPosition(function(position) {
-        let lat = position.coords.latitude; //current location latitude
-        let long = position.coords.longitude; //current location longitude
+    let lat = position.coords.latitude; //current location latitude
+    let long = position.coords.longitude; //current location longitude
 
-        //calling the (5 Day / 3 Hour Forecast)API from OpenWeatherMap
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
+    //calling the (5 Day / 3 Hour Forecast)API from OpenWeatherMap
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
 
-                //Remove the data of the current day from the (5 Day / 3 Hour Forecast)API
-                rmTodayData(data)
+            //Remove the data of the current day from the (5 Day / 3 Hour Forecast)API
+            rmTodayData(data)
 
-                console.log(data.list)
+            console.log(data.list)
 
-                //push Maximum temperatures to one array
-                let MaxTempsObj = new Object
-                collectMaxMinTemps(MaxTempsObj, data, "temp_max")
+            //push Maximum temperatures to one array
+            let MaxTempsObj = new Object
+            collectMaxMinTemps(MaxTempsObj, data, "temp_max")
 
-                //push Minimum temperatures to one array
-                let MinTempsObj = new Object
-                collectMaxMinTemps(MinTempsObj, data, "temp_min")
+            //push Minimum temperatures to one array
+            let MinTempsObj = new Object
+            collectMaxMinTemps(MinTempsObj, data, "temp_min")
 
-                //write maximum and minimum temperatures in the week forecast
-                showMaxTemps(MaxTempsObj)
-                showMinTemps(MinTempsObj)
+            //write maximum and minimum temperatures in the week forecast
+            showMaxTemps(MaxTempsObj)
+            showMinTemps(MinTempsObj)
 
-            })
-    })
-    //Functions
-    //Removing the continent name from the timezone in the api to get the city name only
-let remContinentName = (timezone) => {
-    for (let x = 0; x < timezone.length; x++) {
-        if (timezone[x] == "/") {
-            return timezone.substring(x + 1)
-        }
-    }
-}
+            //show the weather icons in the week forecast
+            showWeatherIcons(data)
 
+        })
+})
 
+//Functions
 //turning the weather forecast to left 
 let turnLeft = () => {
         turnLeftBtn.style.visibility = "hidden"
@@ -90,15 +84,6 @@ let createWeekDays = (halfWeekOrder, numOfDays) => {
 
 createWeekDays(firstHalf, 4) //create 4 days for the first half of the week forecast
 createWeekDays(secondHalf, 3) //create 3 days for the first half of the week forecast
-
-//get the weather icons of the next week
-function getWeatherIcons(weekWeatherApi) {
-    let weatherIcons = document.getElementsByClassName("weekday-weather-icon")
-    for (let x = 0; x < weatherIcons.length; x++) {
-        weatherIcons[x].innerHTML = `<img  
-        src="https://openweathermap.org/img/wn/${weekWeatherApi["daily"][x+1]["weather"][0]["icon"]}@2x.png">`
-    }
-}
 
 
 
@@ -183,5 +168,14 @@ function showMaxTemps(object) {
 function showMinTemps(object) {
     for (let x = 0; x < 4; x++) {
         minTemp[x].textContent = Math.round(Math.min(...object[`day${x}`]))
+    }
+}
+
+//show the weather icons in the week forecast
+function showWeatherIcons(weekWeatherApi) {
+    let weatherIcons = document.getElementsByClassName("weekday-weather-icon")
+    for (let x = 0; x < 4; x++) {
+        weatherIcons[x].innerHTML = `<img  
+src="https://openweathermap.org/img/wn/${weekWeatherApi.list[(8*x)+4]["weather"][0]["icon"]}@2x.png">`
     }
 }
