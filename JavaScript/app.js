@@ -25,7 +25,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
         let long = position.coords.longitude; //current location longitude
 
         //calling the (5 Day / 3 Hour Forecast)API from OpenWeatherMap
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
@@ -35,22 +35,17 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
                 console.log(data.list)
 
-                //Maximum temperatures container
+                //push Maximum temperatures to one array
                 let MaxTempsObj = new Object
                 collectMaxMinTemps(MaxTempsObj, data, "temp_max")
 
-                //Minimum temperatures container
+                //push Minimum temperatures to one array
                 let MinTempsObj = new Object
                 collectMaxMinTemps(MinTempsObj, data, "temp_min")
 
-
-
-                console.log(MaxTempsObj)
-                console.log(MinTempsObj)
-
-
-
-
+                //write maximum and minimum temperatures in the week forecast
+                showMaxTemps(MaxTempsObj)
+                showMinTemps(MinTempsObj)
 
             })
     })
@@ -174,5 +169,19 @@ function collectMaxMinTemps(object, data, tempType) {
             //add the maximum or the minimum temps of each part of the day to the object
             object[`day${dayIndex}`].push(data.list[(dayIndex + threeHoursIndex) + (dayIndex * 7)]["main"][tempType])
         }
+    }
+}
+
+//show maximum temperatures in the week forecast
+function showMaxTemps(object) {
+    for (let x = 0; x < 4; x++) {
+        maxTemp[x].textContent = Math.round(Math.max(...object[`day${x}`]))
+    }
+}
+
+//show minimum temperatures in the week forecast
+function showMinTemps(object) {
+    for (let x = 0; x < 4; x++) {
+        minTemp[x].textContent = Math.round(Math.min(...object[`day${x}`]))
     }
 }
