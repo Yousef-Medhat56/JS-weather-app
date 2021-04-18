@@ -23,15 +23,8 @@
 
 <body>
     <section class="container">
-        <section class="information-bar">
-            <div id="information-bar-location">
-                <!--Loctaion Icon-->
+        <section class="search-bar">
 
-                <!--Loctaion Name-->
-                <h3><i class="fas fa-map-marker-alt"></i><span id="location-name"></span>
-
-                </h3>
-            </div>
             <!--Search city-->
             <div id="search-city">
                 <!--Input city-->
@@ -44,6 +37,26 @@
         </section>
         <!--Today Weather -->
         <section class="today-weather">
+
+            <!--location and date-->
+            <div id="location-date">
+                <div id="location-div">
+                    <!--Loctaion name-->
+
+
+                    <h3><i class="fas fa-map-marker-alt"></i><span id="location-name"></span>
+
+                    </h3>
+                </div>
+
+                <div id="today-date">
+                    <span class="weekday-name"></span>
+                    <div>
+                        <span class="weekday-date-num"></span>
+                        <span class="weekday-date-month"></span></div>
+
+                </div>
+            </div>
 
             <!--Today weather Icon-->
             <div id="today-weather-icon"></div>
@@ -61,9 +74,7 @@
                 </div>
 
             </div>
-            <div id="today-name">
-                <snap class="weekday-name"></snap>
-            </div>
+
             </div>
         </section>
 
@@ -71,7 +82,7 @@
         <section class="weather-forecast">
             <button onclick="turnLeft()" id="turn-left-btn"><i class="fas fa-chevron-left"></i></button>
             <div id="first-half-week"></div>
-            <div id="second-half-week"></div>
+
             <button onclick="turnRight()" id="turn-right-btn"><i class="fas fa-chevron-right"></i></button>
         </section>
     </section>
