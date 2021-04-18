@@ -8,6 +8,11 @@
     <title>Document</title>
     <!--Style-->
     <link rel="stylesheet" href="CSS/style.css">
+    <!--weather icons-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons-wind.min.css">
+
+    <link rel="stylesheet" href="CSS/weather-icons/weather-icons.min.css">
+
     <!--Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
@@ -23,14 +28,18 @@
                 <!--Loctaion Icon-->
 
                 <!--Loctaion Name-->
-                <h3><i class="fas fa-map-marker-alt"></i><span id="location-name"></span></h3>
+                <h3><i class="fas fa-map-marker-alt"></i><span id="location-name"></span>
+
+                </h3>
             </div>
             <!--Search city-->
             <div id="search-city">
                 <!--Input city-->
                 <input type="text" id="search-city-input" placeholder="search city ...">
                 <!--cities choices-->
-                <ul id="cities-lists-container"></ul>
+                <ul id="cities-lists-container">
+
+                </ul>
             </div>
         </section>
         <!--Today Weather -->
@@ -48,7 +57,7 @@
                 <!--Today weather Information| Temperature-->
                 <div id="today-weather-temp">
                     <div id="current-temp"><span id="current-temp-span"></span><span>&#8451;</span></div>
-                    <div id="max-min-temp-span"><span class="max-temp-span"></span>/<span class="min-temp-span"></span><span>&#8451;</span></div>
+
                 </div>
 
             </div>
