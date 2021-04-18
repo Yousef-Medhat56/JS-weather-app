@@ -28,12 +28,20 @@ navigator.geolocation.getCurrentPosition(function(position) {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
+            console.log(data.list)
 
             //Remove the data of the current day from the (5 Day / 3 Hour Forecast)API
             rmTodayData(data)
 
             console.log(data.list)
+
+            //show today weather icon ,description and current temp
+            getTodayWeather(data)
+
+            //The Week forecast
+
+            //show the weather icons in the week forecast
+            showWeatherIcons(data)
 
             //push Maximum temperatures to one array
             let MaxTempsObj = new Object
@@ -46,14 +54,33 @@ navigator.geolocation.getCurrentPosition(function(position) {
             //write maximum and minimum temperatures in the week forecast
             showMaxTemps(MaxTempsObj)
             showMinTemps(MinTempsObj)
-
-            //show the weather icons in the week forecast
-            showWeatherIcons(data)
-
         })
 })
 
 //Functions
+
+//Calling (Current Weather Data) API from OpenWeatherMap by the city name to get the current temp, weather icon and weather description
+function getTodayWeather(weekWeatherApi) {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${weekWeatherApi.city.name}&appid=${apiKey}&units=metric`)
+        .then((cityResponse) => cityResponse.json())
+        .then((cityData) => {
+            console.log(cityData)
+
+            //write current temperature
+            currentTemp.textContent = Math.round(cityData["main"]["temp"])
+
+            //write current weather description
+            weatherDesc.textContent = cityData["weather"][0]["description"];
+
+            //Get the current weather icon
+            /*weatherIcon.innerHTML = `<img  
+            src="https://openweathermap.org/img/wn/${cityData["weather"][0]["icon"]}@2x.png">`*/
+
+            weatherIcon.innerHTML = `<div><i class = "wi wi-owm-${cityData["weather"][0]["id"]}"></i></div>`
+
+        })
+}
+
 //turning the weather forecast to left 
 let turnLeft = () => {
         turnLeftBtn.style.visibility = "hidden"
@@ -172,10 +199,10 @@ function showMinTemps(object) {
 }
 
 //show the weather icons in the week forecast
+//the icons is for the weather at 12 pm
 function showWeatherIcons(weekWeatherApi) {
     let weatherIcons = document.getElementsByClassName("weekday-weather-icon")
     for (let x = 0; x < 4; x++) {
-        weatherIcons[x].innerHTML = `<img  
-src="https://openweathermap.org/img/wn/${weekWeatherApi.list[(8*x)+4]["weather"][0]["icon"]}@2x.png">`
+        weatherIcons[x].innerHTML = `<diV><i class = "wi wi-owm-${weekWeatherApi.list[(8*x)+4]["weather"][0]["id"]}"></i></div>`
     }
 }
