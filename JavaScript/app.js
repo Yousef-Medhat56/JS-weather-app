@@ -9,14 +9,14 @@ const currentTemp = document.getElementById("current-temp-span")
 const maxTemp = document.getElementsByClassName("max-temp-span")
 const minTemp = document.getElementsByClassName("min-temp-span")
     //HTML elements | weather icon
-const weatherIcon = document.getElementById("today-weather-icon")
+const curWeatherIcon = document.getElementById("today-weather-icon")
     //HTML elements | weather description
-const weatherDesc = document.getElementById("today-weather-desc")
+const curWeatherDesc = document.getElementById("today-weather-desc")
     //HTML elements | turn left and right buttons
 const turnRightBtn = document.getElementById("turn-right-btn")
 const turnLeftBtn = document.getElementById("turn-left-btn")
     //HTML elements | week forecast
-const firstHalf = document.getElementById("first-half-week")
+const forecastContainer = document.getElementById("weather-forecast-container")
 const secondHalf = document.getElementById("second-half-week")
 
 //Getting the current location coordinates
@@ -28,7 +28,15 @@ navigator.geolocation.getCurrentPosition(function(position) {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data.list)
+            console.log(data)
+
+            //get weekdays names
+            writeDaysName(data)
+
+            //get weekday date in the week forecast
+            writeDaysDate(data)
+
+            writeMonName(data)
 
             //Remove the data of the current day from the (5 Day / 3 Hour Forecast)API
             rmTodayData(data)
@@ -41,7 +49,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
             //The Week forecast
 
             //show the weather icons in the week forecast
-            showWeatherIcons(data)
+            showcurWeatherIcons(data)
 
             //push Maximum temperatures to one array
             let MaxTempsObj = new Object
@@ -70,31 +78,14 @@ function getTodayWeather(weekWeatherApi) {
             currentTemp.textContent = Math.round(cityData["main"]["temp"])
 
             //write current weather description
-            weatherDesc.textContent = cityData["weather"][0]["description"];
+            curWeatherDesc.textContent = cityData["weather"][0]["description"];
 
-            //Get the current weather icon
-            /*weatherIcon.innerHTML = `<img  
-            src="https://openweathermap.org/img/wn/${cityData["weather"][0]["icon"]}@2x.png">`*/
-
-            weatherIcon.innerHTML = `<div><i class = "wi wi-owm-${cityData["weather"][0]["id"]}"></i></div>`
+            //get the current weather icon
+            curWeatherIcon.innerHTML = `<div><i class = "wi wi-owm-${cityData["weather"][0]["id"]}"></i></div>`
 
         })
 }
 
-//turning the weather forecast to left 
-let turnLeft = () => {
-        turnLeftBtn.style.visibility = "hidden"
-        turnRightBtn.style.visibility = "visible"
-        firstHalf.style.left = "-105%"
-        secondHalf.style.left = "5%"
-    }
-    //turning the weather forecast to right 
-let turnRight = () => {
-    turnLeftBtn.style.visibility = "visible"
-    turnRightBtn.style.visibility = "hidden"
-    firstHalf.style.left = "5%"
-    secondHalf.style.left = "105%"
-}
 
 //creating weekdays Divs in week forecast
 let createWeekDays = (halfWeekOrder, numOfDays) => {
@@ -109,8 +100,8 @@ let createWeekDays = (halfWeekOrder, numOfDays) => {
     }
 }
 
-createWeekDays(firstHalf, 4) //create 4 days for the first half of the week forecast
-createWeekDays(secondHalf, 3) //create 3 days for the first half of the week forecast
+createWeekDays(forecastContainer, 4) //create 4 days for the  weather forecast
+
 
 
 
@@ -118,8 +109,8 @@ createWeekDays(secondHalf, 3) //create 3 days for the first half of the week for
 function makeDateArr(weekWeatherApi) {
     let milliseconds;
     let dateArr = [] //to push the date values inside it
-    for (let x = 0; x < 8; x++) { //(8) : sum of today and the 7 days of the next week
-        milliseconds = (weekWeatherApi["daily"][x]["dt"] * 1000) //convert seconds to milliseconds
+    for (let x = 0; x < 5; x++) { //(8) : sum of today and the 7 days of the next week
+        milliseconds = (weekWeatherApi.list[x + (7 * x)]["dt"] * 1000) //convert seconds to milliseconds
         dateArr.push(new Date(milliseconds)) //add each day date to the array
     }
     return dateArr
@@ -139,7 +130,7 @@ function writeDaysName(weekWeatherApi) {
 function writeDaysDate(weekWeatherApi) {
     let weekdaysDate = document.getElementsByClassName("weekday-date-num")
     for (let x = 0; x < weekdaysDate.length; x++) {
-        weekdaysDate[x].textContent = `${makeDateArr(weekWeatherApi)[x + 1].getDate()} `
+        weekdaysDate[x].textContent = `${makeDateArr(weekWeatherApi)[x].getDate()} `
     }
 }
 
@@ -149,7 +140,7 @@ function writeMonName(weekWeatherApi) {
     let monNameSpans = document.getElementsByClassName("weekday-date-month")
 
     for (let x = 0; x < monNameSpans.length; x++) {
-        monNameSpans[x].textContent = monNames[makeDateArr(weekWeatherApi)[x + 1].getMonth()]
+        monNameSpans[x].textContent = monNames[makeDateArr(weekWeatherApi)[x].getMonth()]
     }
 }
 
@@ -200,9 +191,9 @@ function showMinTemps(object) {
 
 //show the weather icons in the week forecast
 //the icons is for the weather at 12 pm
-function showWeatherIcons(weekWeatherApi) {
-    let weatherIcons = document.getElementsByClassName("weekday-weather-icon")
+function showcurWeatherIcons(weekWeatherApi) {
+    let curWeatherIcons = document.getElementsByClassName("weekday-weather-icon")
     for (let x = 0; x < 4; x++) {
-        weatherIcons[x].innerHTML = `<diV><i class = "wi wi-owm-${weekWeatherApi.list[(8*x)+4]["weather"][0]["id"]}"></i></div>`
+        curWeatherIcons[x].innerHTML = `<diV><i class = "wi wi-owm-${weekWeatherApi.list[(8*x)+4]["weather"][0]["id"]}"></i></div>`
     }
 }
