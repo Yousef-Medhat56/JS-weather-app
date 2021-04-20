@@ -30,6 +30,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
         .then((data) => {
             console.log(data)
 
+            //write the city name
+            writeCityName(data)
+
             //get weekdays names
             writeDaysName(data)
 
@@ -84,6 +87,11 @@ function getTodayWeather(weekWeatherApi) {
             curWeatherIcon.innerHTML = `<div><i class = "wi wi-owm-${cityData["weather"][0]["id"]}"></i></div>`
 
         })
+}
+
+////write the city name
+function writeCityName(weekWeatherApi) {
+    locationName.textContent = weekWeatherApi.city.name
 }
 
 
