@@ -48,7 +48,7 @@ div {
 
 /*search bar | Input styles*/
 
-.search-bar #search-city {
+.search-bar .search-city {
     position: relative;
     order: 1;
     flex-basis: 20%;
@@ -57,7 +57,7 @@ div {
     align-items: center;
 }
 
-.search-bar #search-city input {
+.search-bar .search-city input {
     width: 100%;
     height: 45%;
     outline: none;
@@ -69,9 +69,9 @@ div {
 }
 
 
-/*search bar | choices container styles*/
+/*search bar | search results container styles*/
 
-.search-bar #search-city ul {
+.search-bar .search-city ul {
     position: absolute;
     top: 72%;
     width: 100%;
@@ -82,15 +82,15 @@ div {
 }
 
 
-/*search bar | choices styles*/
+/*search bar | search results styles*/
 
-.search-bar #search-city ul li {
+.search-bar .search-city ul li {
     position: relative;
     padding: 5px 0 5px 5px;
     cursor: pointer;
 }
 
-.search-bar #search-city ul li::before {
+.search-bar .search-city ul li::before {
     position: absolute;
     top: 1px;
     left: 0;
@@ -101,7 +101,7 @@ div {
     background-color: grey;
 }
 
-.search-bar #search-city ul li:last-child {
+.search-bar .search-city ul li:last-child {
     padding-bottom: 10px;
 }
 
@@ -124,7 +124,7 @@ div {
 
 /*Location and date div*/
 
-#location-date {
+.location-date {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -135,7 +135,7 @@ div {
 
 /*location*/
 
-#location-div {
+.location-div {
     order: 0;
     flex-basis: 50%;
     height: 100%;
@@ -146,13 +146,13 @@ div {
 
 /*location | icon and city name*/
 
-#location-div h3 {
+.location-div h3 {
     font-size: 2.1em;
     font-weight: 550;
     color: var(--white)
 }
 
-#location-div h3 i {
+.location-div h3 i {
     margin-right: 15px;
     font-size: 0.9em;
 }
@@ -160,7 +160,7 @@ div {
 
 /*Today date*/
 
-#today-date {
+.today-date {
     color: var(--white);
     font-size: 1.5em;
     font-weight: 500;
@@ -171,7 +171,7 @@ div {
 
 /*today-weather | styling the size of the current weather icon*/
 
-#today-weather-icon {
+.today-weather-icon {
     width: 50%;
     height: 50%;
     display: flex;
@@ -179,7 +179,7 @@ div {
     justify-content: center;
 }
 
-#today-weather-icon i {
+.today-weather-icon i {
     width: 100%;
     height: 100%;
     color: var(--white);
@@ -189,7 +189,7 @@ div {
 
 /*Today weather| Information*/
 
-#today-weather-info {
+.today-weather-info {
     height: 15vh;
     width: 100%;
     margin: 0 auto;
@@ -203,8 +203,8 @@ div {
 
 /*Today weather Information | temperature and weather description*/
 
-#today-weather-temp,
-#today-weather-desc {
+.today-weather-temp,
+.today-weather-desc {
     height: 100%;
     width: fit-content;
     display: flex;
@@ -213,8 +213,8 @@ div {
     justify-content: center;
 }
 
-#today-weather-temp #current-temp,
-#today-weather-desc {
+.today-weather-temp .current-temp,
+.today-weather-desc {
     font-size: 1.8em;
     font-weight: 500;
     text-align: center;
@@ -223,7 +223,7 @@ div {
 
 /*Today weather Information | Temperature | Max and Min temp*/
 
-#today-weather-temp {
+.today-weather-temp {
     font-size: 1.3em;
     letter-spacing: 3px;
 }
@@ -242,7 +242,7 @@ div {
     margin-bottom: 3%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background-color: rgb(0, 0, 0, 0.1);
 }
 
@@ -309,30 +309,12 @@ div {
 
 /*weather forecast container | First & second halfs of week*/
 
-#first-half-week,
-#second-half-week {
-    position: absolute;
-    left: 5%;
+.weather-forecast-container {
     width: 90%;
     height: 80%;
     display: flex;
-    align-items: row;
+    flex-direction: row;
     justify-content: space-between;
-    transition: all 0.8s ease;
-}
-
-
-/*weather forecast container |first-half-week position*/
-
-#first-half-week {
-    left: 5%;
-}
-
-
-/*weather forecast container |second-half-week position*/
-
-#second-half-week {
-    left: 105%;
 }
 
 
