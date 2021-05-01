@@ -8,6 +8,7 @@
     <title>Document</title>
     <!--Style-->
     <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/weather-pages-styles.css">
     <!--weather icons-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons-wind.min.css">
 
@@ -22,70 +23,76 @@
 </head>
 
 <body>
-    <section class="container">
-        <section class="search-bar">
+    <section id="main-container">
+        <section class="container">
+            <section class="search-bar">
 
-            <!--Search city-->
-            <div id="search-city">
-                <!--Input city-->
-                <input type="text" id="search-city-input" placeholder="search city ...">
-                <!--cities choices-->
-                <ul id="cities-lists-container">
+                <!--Search city-->
+                <div class="search-city">
+                    <!--Input city-->
+                    <input type="text" class="search-city-input" placeholder="search city ...">
+                    <!--cities choices-->
+                    <ul class="cities-lists-container">
 
-                </ul>
-            </div>
-        </section>
-        <!--Today Weather -->
-        <section class="today-weather">
+                    </ul>
+                </div>
+            </section>
+            <!--Today Weather -->
+            <section class="today-weather">
 
-            <!--location and date-->
-            <div id="location-date">
-                <div id="location-div">
-                    <!--Loctaion name-->
+                <!--location and date-->
+                <div class="location-date">
+                    <div class="location-div">
+                        <!--Loctaion name-->
 
 
-                    <h3><i class="fas fa-map-marker-alt"></i><span id="location-name"></span>
+                        <h3><i class="fas fa-map-marker-alt"></i><span class="location-name"></span>
 
-                    </h3>
+                        </h3>
+                    </div>
+
+                    <div class="today-date">
+                        <span class="current-day-name"></span>
+
+                        <div>
+                            <span class="current-day-date"></span>
+
+                            <span class="current-day-month"></span>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div id="today-date">
-                    <span class="weekday-name"></span>
-                    <div>
-                        <span class="weekday-date-num"></span>
-                        <span class="weekday-date-month"></span></div>
+                <!--Today weather Icon-->
+                <div class="today-weather-icon"></div>
 
-                </div>
-            </div>
+                <!--Today weather Information-->
+                <div class="today-weather-info">
 
-            <!--Today weather Icon-->
-            <div id="today-weather-icon"></div>
+                    <!--Today weather Information| weather description-->
+                    <div class="today-weather-desc"></div>
 
-            <!--Today weather Information-->
-            <div id="today-weather-info">
+                    <!--Today weather Information| Temperature-->
+                    <div class="today-weather-temp">
+                        <div class="current-temp"><span class="current-temp-span"></span><span>&#8451;</span></div>
 
-                <!--Today weather Information| weather description-->
-                <div id="today-weather-desc"></div>
-
-                <!--Today weather Information| Temperature-->
-                <div id="today-weather-temp">
-                    <div id="current-temp"><span id="current-temp-span"></span><span>&#8451;</span></div>
+                    </div>
 
                 </div>
 
-            </div>
+                </div>
+            </section>
 
-            </div>
+            <!--Weather forecast for the next week-->
+            <section class="weather-forecast">
+                <div class="weather-forecast-container"></div>
+            </section>
+
         </section>
-
-        <!--Weather forecast for the next week-->
-        <section class="weather-forecast">
-            <div id="weather-forecast-container"></div>
-        </section>
-
     </section>
     <script src="JavaScript/app.js"></script>
     <script src="JavaScript/search-city.js"></script>
+    <script src="JavaScript/searched-cities.js"></script>
 </body>
 
 </html>
