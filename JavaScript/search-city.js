@@ -10,7 +10,7 @@ let countriesArr = []
 let statesArr = []
 
 //result container : combine the city, state and country names together
-let resultContainer = []
+let availableResults = []
 
 //search results array
 let resultsArr = []
@@ -35,7 +35,7 @@ let makeJsonArr = () => {
             statesArr.push(`${data[x]["state"]}`)
 
             //combine the cities, countries and states in one array
-            resultContainer.push((statesArr[x]) ? //if the city has a state name
+            availableResults.push((statesArr[x]) ? //if the city has a state name
                     `${citiesArr[x]}, ${statesArr[x]} - ${countriesArr[x]}` : //write the state name in the result 
                     `${citiesArr[x]} - ${countriesArr[x]}`) //else : DON'T write the state name
 
@@ -51,8 +51,8 @@ let makeResultsArr = (index) => { //index : the page index
     //filtering the cities array to make choices array
     if (document.querySelectorAll(".search-city-input")[index].value.length > 0) {
 
-        //search the results that start with the entered letters 
-        resultsArr = resultContainer.filter(value => (value.toLowerCase()).startsWith(document.querySelectorAll(".search-city-input")[index].value.toLowerCase()))
+        //search the results that start with the entered letters if
+        resultsArr = availableResults.filter(value => (value.toLowerCase()).startsWith(document.querySelectorAll(".search-city-input")[index].value.toLowerCase()))
     }
 
 }
@@ -112,9 +112,26 @@ function showResultsArr(index) { //index : the page index
 
     }
 
+    //if there is no availble results 
+    else if (resultsArr.length == 0 && document.querySelectorAll(".search-city-input")[index].value.length != 0) {
+        checkRmResult(index)
+    }
+
 }
 
 
+function checkRmResult(index) {
+    //check if the user searchs a city that he already has added it before
+    let RemovedResult = rmResultsArr.filter(value => (value.toLowerCase()).startsWith(document.querySelectorAll(".search-city-input")[index].value.toLowerCase()))[0]
+    if (RemovedResult) {
+        document.querySelectorAll(".cities-lists-container")[index].innerHTML = `<li>You added ${RemovedResult}</li>`
+    }
+    //if the input in the search bar doesn't match any results or cities have been added
+    else {
+        document.querySelectorAll(".cities-lists-container")[index].innerHTML = `<li>No available results</li>`
+    }
+
+}
 
 //add keyup event for all the searchbars
 addKeyUpEv()
@@ -130,7 +147,7 @@ function addKeyUpEv() {
 
 
 
-
+//the function that is called after (keyup) event on the search bar
 function keyUpFun(event) {
 
     //convert search bars (node list) into an (array) to can get the idex of each element in it
