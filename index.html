@@ -9,6 +9,7 @@
     <!--Style-->
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/weather-pages-styles.css">
+    <link rel="stylesheet" href="CSS/search-style.css">
     <!--weather icons-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons-wind.min.css">
 
@@ -25,18 +26,28 @@
 <body>
     <section id="main-container">
         <section class="container">
-            <section class="search-bar">
 
-                <!--Search city-->
-                <div class="search-city">
-                    <!--Input city-->
-                    <input type="text" class="search-city-input" placeholder="search city ...">
-                    <!--cities choices-->
-                    <ul class="cities-lists-container">
+            <!--search city seaction -->
+            <section class="search-container">
 
-                    </ul>
+                <div class="search-container-div">
+                    <!--search bar-->
+                    <div class="search-bar-container">
+
+                        <!--input field -->
+                        <input type="text" class="searchbar-input" placeholder="search city ...">
+
+                        <!--search icon-->
+                        <div class="search-icon"><i class="fas fa-search"></i></div>
+
+                    </div>
+                    <!--results container-->
+                    <ul class="results-container"> </ul>
+
+
                 </div>
             </section>
+
             <!--Today Weather -->
             <section class="today-weather">
 
@@ -44,11 +55,7 @@
                 <div class="location-date">
                     <div class="location-div">
                         <!--Loctaion name-->
-
-
-                        <h3><i class="fas fa-map-marker-alt"></i><span class="location-name"></span>
-
-                        </h3>
+                        <h3><span class="location-name"></span></h3>
                     </div>
 
                     <div class="today-date">
@@ -90,9 +97,10 @@
 
         </section>
     </section>
-    <script src="JavaScript/app.js"></script>
+    <script src="JavaScript/main.js"></script>
     <script src="JavaScript/search-city.js"></script>
-    <script src="JavaScript/searched-cities.js"></script>
+    <script src="JavaScript/clickResult.js"></script>
+    <script src="JavaScript/style.js"></script>
 </body>
 
 </html>
