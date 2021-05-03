@@ -49,38 +49,21 @@ makeJsonArr() //make arrays for all the cities& countriesin& states in (city-nam
 let makeResultsArr = (index) => { //index : the page index
 
     //filtering the cities array to make choices array
-    if (document.querySelectorAll(".search-city-input")[index].value.length > 0) {
+    if (document.querySelectorAll(".search-bar-container input")[index].value.length > 0) {
 
         //search the results that start with the entered letters if
-        resultsArr = availableResults.filter(value => (value.toLowerCase()).startsWith(document.querySelectorAll(".search-city-input")[index].value.toLowerCase()))
+        resultsArr = availableResults.filter(value => (value.toLowerCase()).startsWith(document.querySelectorAll(".search-bar-container input")[index].value.toLowerCase()))
     }
 
 }
 
-//blur all the DIVs except the search bar and its options during searching
-let blurDiv = (index, blurValue) => { //index : the page index
-
-
-    //blur all the DIVs 
-    for (let x = 0; document.querySelectorAll(".container")[index].querySelectorAll("div").length > x; x++) {
-        document.querySelectorAll(".container")[index].querySelectorAll("div")[x].style.filter = blurValue
-    }
-
-    //except the search bar and its results from the blur effect
-    for (let x = 0; document.querySelectorAll(".search-city").length > x; x++) {
-        document.querySelectorAll(".search-city")[x].style.filter = "none"
-    }
-
-}
 
 //page styles if the search bar is empty
 function emptySearchBar(index) { //index : the page index
 
     //remove the results if the search bar is empty
-    document.querySelectorAll(".cities-lists-container")[index].innerHTML = ""
+    document.querySelectorAll(".results-container")[index].innerHTML = ""
 
-    //cancel the blur effect if the search bar is empty
-    blurDiv(index, "none")
 }
 
 //showing the search results 
@@ -88,47 +71,51 @@ function showResultsArr(index) { //index : the page index
 
     //if the search bar is empty
     emptySearchBar(index)
+    rmHoverEffect(index)
 
     //function that create the search result during searching in form of (li) tags
     let createSearchResults = (maxLength) => {
         for (let x = 0; x < maxLength; x++) {
-            document.querySelectorAll(".cities-lists-container")[index].innerHTML += `<li onclick = clickResult(event)>${resultsArr[x]}</li>`
+            document.querySelectorAll(".results-container")[index].innerHTML += `<li onclick = clickResult(event)>${resultsArr[x]}</li>`
         }
     }
 
-    //showing 5 results only as maximum
-    if (resultsArr.length > 5 && document.querySelectorAll(".search-city-input")[index].value.length != 0) {
+    //if the user type in the search bar
+    if (document.querySelectorAll(".search-bar-container input")[index].value.length != 0) {
 
-        createSearchResults(5) //create 5 results only
-        blurDiv(index, "blur(3px)") //add blur effects to all the page except the search bar
+        keepHoverEffect(index) //keep the searchbar obvious for the user
 
+        //showing 5 results only as maximum
+        if (resultsArr.length > 5) {
+
+            createSearchResults(5) //create 5 results only
+        }
+
+        //showing all the elements in (resultsArr)
+        else if (resultsArr.length > 0 && resultsArr.length <= 5) {
+
+            createSearchResults(resultsArr.length)
+        }
+
+        //if there is no availble results 
+        else if (resultsArr.length == 0) {
+            checkRmResult(index)
+        }
     }
 
-    //showing choices of all the values in the (resultsArr)
-    else if (resultsArr.length > 0 && resultsArr.length <= 5 && document.querySelectorAll(".search-city-input")[index].value.length != 0) {
-
-        createSearchResults(resultsArr.length)
-        blurDiv(index, "blur(3px)") //add blur effects to all the page except the search bar
-
-    }
-
-    //if there is no availble results 
-    else if (resultsArr.length == 0 && document.querySelectorAll(".search-city-input")[index].value.length != 0) {
-        checkRmResult(index)
-    }
 
 }
 
 
 function checkRmResult(index) {
     //check if the user searchs a city that he already has added it before
-    let RemovedResult = rmResultsArr.filter(value => (value.toLowerCase()).startsWith(document.querySelectorAll(".search-city-input")[index].value.toLowerCase()))[0]
+    let RemovedResult = rmResultsArr.filter(value => (value.toLowerCase()).startsWith(document.querySelectorAll(".search-bar-container input")[index].value.toLowerCase()))[0]
     if (RemovedResult) {
-        document.querySelectorAll(".cities-lists-container")[index].innerHTML = `<li>You added ${RemovedResult}</li>`
+        document.querySelectorAll(".results-container")[index].innerHTML = `<li>You added ${RemovedResult}</li>`
     }
     //if the input in the search bar doesn't match any results or cities have been added
     else {
-        document.querySelectorAll(".cities-lists-container")[index].innerHTML = `<li>No available results</li>`
+        document.querySelectorAll(".results-container")[index].innerHTML = `<li>No available results</li>`
     }
 
 }
@@ -137,10 +124,10 @@ function checkRmResult(index) {
 addKeyUpEv()
 
 function addKeyUpEv() {
-    for (let x = 0; x < document.querySelectorAll(".search-city-input").length; x++) {
+    for (let x = 0; x < document.querySelectorAll(".search-bar-container input").length; x++) {
 
         //add keyup event for each search bar
-        document.querySelectorAll(".search-city-input")[x].addEventListener("keyup", keyUpFun)
+        document.querySelectorAll(".search-bar-container input")[x].addEventListener("keyup", keyUpFun)
     }
 }
 
@@ -151,7 +138,7 @@ function addKeyUpEv() {
 function keyUpFun(event) {
 
     //convert search bars (node list) into an (array) to can get the idex of each element in it
-    let searchBarsArr = Array.from(document.querySelectorAll(".search-city-input"))
+    let searchBarsArr = Array.from(document.querySelectorAll(".search-bar-container input"))
 
     //the index of the search that keyup event occurs on it
     searchBarIndex = searchBarsArr.indexOf(event.target)
