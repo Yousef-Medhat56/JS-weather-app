@@ -33,13 +33,13 @@ let showBtn = () => {
 
     //when a new page is adde (the number of pages >1)
     if (pagesLength > 1) {
-        //show right button of the first page and hide the last one
-        rightBtn[0].style.visibility = "visible"
-        leftBtn[0].style.visibility = "hidden"
+        //show left button of the first page and hide the last one
+        rightBtn[0].style.visibility = "hidden"
+        leftBtn[0].style.visibility = "visible"
 
-        //show left button of the last page and hide the first one
-        leftBtn[pagesLength - 1].style.visibility = "visible"
-        rightBtn[pagesLength - 1].style.visibility = "hidden"
+        //show right button of the last page and hide the first one
+        leftBtn[pagesLength - 1].style.visibility = "hidden"
+        rightBtn[pagesLength - 1].style.visibility = "visible"
 
 
         //show both of the right and the left buttons of the pages between the first and the last page
@@ -48,4 +48,21 @@ let showBtn = () => {
             leftBtn[x + 1].style.visibility = "visible"
         }
     }
+}
+
+//increase the main container width when a new city(page) is added 
+let stretchMainCo = () => {
+    //make the main container width equals the sum of all pages
+    mainContainer.style.width = `${document.querySelectorAll(".container").length * 100}vw`
+}
+
+//Function that are called onclick buttons
+
+//onclick left button function
+let clickSlideBtn = (event, slideDirection) => {
+    //get the button index
+    let leftBtnIndex = (Array.from(document.getElementsByClassName(`${event.target.className}`))).indexOf(event.target)
+
+    //add CSS transform translate property to the main container
+    mainContainer.style.transform = `translateX(${-100*(leftBtnIndex+(slideDirection))}vw)`
 }
