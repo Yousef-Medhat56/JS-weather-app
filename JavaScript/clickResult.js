@@ -6,15 +6,17 @@ let rmResultsArr = new Array
 
 function clickResult(event) {
 
-    //after clicking the result : cancel the blur effect & clear the search bar
-    emptySearchBar(searchBarIndex)
+    //remove the hover effect on the search bar
+    rmHoverEffect(searchBarIndex)
 
+    //after clicking the result : clear the search bar
+    emptySearchBar(searchBarIndex)
 
     //add new page with the searched city data
     mainContainer.innerHTML += pageContent
 
-    //add keyup event to the new search bar
-    addKeyUpEv()
+    //increase the main container width 
+    stretchMainCo()
 
     //fetch the searched city API
     fetchResult(event)
@@ -22,7 +24,8 @@ function clickResult(event) {
     //remove the clicked result from the available results array
     rmClickedResult(event)
 
-
+    //show slide buttons
+    showBtn()
 }
 
 //fetch the searched city API
