@@ -2,20 +2,30 @@
 
 #main-container {
     position: relative;
+    height: 100vh;
+    width: 100vw;
+    transition: transform 0.4s ease-in-out;
 }
 
 .container:nth-child(2) {
-    left: 100%;
+    left: 100vw;
 }
 
 .container:nth-child(3) {
-    left: 200%;
+    left: 200vw;
 }
 
 .container:nth-child(4) {
-    left: 300%;
+    left: 300vw;
 }
 
 .container:nth-child(5) {
-    left: 400%;
+    left: 400vw;
+}
+
+
+/*hide the scroll bar*/
+
+::-webkit-scrollbar {
+    display: none
 }
