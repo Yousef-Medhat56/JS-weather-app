@@ -120,19 +120,6 @@ function checkRmResult(index) {
 
 }
 
-//add keyup event for all the searchbars
-addKeyUpEv()
-
-function addKeyUpEv() {
-    for (let x = 0; x < document.querySelectorAll(".search-bar-container input").length; x++) {
-
-        //add keyup event for each search bar
-        document.querySelectorAll(".search-bar-container input")[x].addEventListener("keyup", keyUpFun)
-    }
-}
-
-
-
 
 //the function that is called after (keyup) event on the search bar
 function keyUpFun(event) {
