@@ -35,7 +35,7 @@
                     <div class="search-bar-container">
 
                         <!--input field -->
-                        <input type="text" class="searchbar-input" placeholder="search city ...">
+                        <input onkeyup="keyUpFun(event)" type="text" class="searchbar-input" placeholder="search city ...">
 
                         <!--search icon-->
                         <div class="search-icon"><i class="fas fa-search"></i></div>
@@ -52,7 +52,7 @@
             <section class="today-weather-section">
 
                 <!--left button-->
-                <button class="left-btn"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="clickSlideBtn(event,1)" class="left-btn"><i class="fas fa-chevron-left"></i></button>
 
                 <div class="today-weather">
                     <!--location and date-->
@@ -94,7 +94,7 @@
                 </div>
 
                 <!--right button-->
-                <button class="right-btn"><i class="fas fa-chevron-right"></i></button>
+                <button onclick="clickSlideBtn(event,-1)" class="right-btn"><i class="fas fa-chevron-right"></i></button>
 
             </section>
 
