@@ -26,6 +26,12 @@ function clickResult(event) {
 
     //show slide buttons
     showBtn()
+
+    //control the display of search bars 
+    searchBarDisplay()
+
+    //control the display of delete buttons
+    delBtnDisplay()
 }
 
 //fetch the searched city API
