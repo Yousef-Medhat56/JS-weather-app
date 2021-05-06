@@ -32,6 +32,10 @@ function clickResult(event) {
 
     //control the display of delete buttons
     delBtnDisplay()
+
+    //make the main container transform to the new page after adding it
+    mainContainer.style.transform = `translateX(${(document.querySelectorAll(".container").length-1)*-100}vw)`
+
 }
 
 //fetch the searched city API
