@@ -4,11 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Kiwi Maru', serif;
-}
-
-div {
-    transition: 0.3s filter ease;
+    font-family: 'Noto Sans HK', sans-serif;
 }
 
 
@@ -18,6 +14,13 @@ div {
     --light-blue: #469DE6;
     --dark-blue: #161623;
     --white: #f2f2f1;
+}
+
+
+/*the background of any element if it is selected*/
+
+*::selection {
+    background-color: var(--dark-blue)
 }
 
 
@@ -61,6 +64,7 @@ div {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 
@@ -108,12 +112,16 @@ div {
 
 /*today-weather | styling the size of the current weather icon*/
 
-.today-weather-icon {
+.today-weather-icon,
+.spinner-div {
     width: 50%;
     height: 50%;
-    display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.today-weather-icon {
+    display: flex;
 }
 
 .today-weather-icon i {
