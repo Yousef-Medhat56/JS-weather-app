@@ -173,5 +173,6 @@ function rmloadStyle() {
             /*show the search bar 
             the search bar was hidden to prevent the user from searching a new city before loading the page */
         document.querySelectorAll(".search-container-div")[document.querySelectorAll(".search-container-div").length - 1].style.visibility = "visible"
+        document.querySelectorAll(".weather-forecast")[document.querySelectorAll(".weather-forecast").length - 1].style.display = "flex"
     }
 }
