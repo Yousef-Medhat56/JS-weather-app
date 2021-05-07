@@ -4,6 +4,9 @@ const apiKey = "c1175134deb4968fd0eaf3b28c9d9ed2"
 //HTML elements | body tag
 const mainContainer = document.getElementById("main-container")
 
+//html elements | the content of each single page without preloader text
+const pageContent = mainContainer.innerHTML
+
 //HTML elements | location name
 let locationName
 
@@ -34,8 +37,17 @@ let maxTemp
 //HTML elements | minimum temperatures in the weather forecast
 let minTemp
 
+
+//write text that appear in the first page only 
+writePreloaderText()
+
 //Getting the current location coordinates
-navigator.geolocation.getCurrentPosition(function(position) {
+navigator.geolocation.getCurrentPosition(allowLocation)
+
+//the function called when the user allow the browser to get his current position
+function allowLocation(position) {
+
+    document.querySelector(".spinner-div").style.display = "flex" //show loading spinner
     let lat = position.coords.latitude; //current location latitude
     let long = position.coords.longitude; //current location longitude
 
@@ -44,9 +56,12 @@ navigator.geolocation.getCurrentPosition(function(position) {
         .then((response) => response.json())
         .then((data) => {
 
+            //call the main function
             collectWeatherData(data)
         })
-})
+}
+
+
 
 //Functions
 
@@ -88,6 +103,9 @@ function collectWeatherData(data) {
     //write maximum and minimum temperatures in the week forecast
     showMaxTemps(MaxTempsObj)
     showMinTemps(MinTempsObj)
+
+    //remove loading styles after the page is loaded completely
+    rmloadStyle()
 }
 
 
@@ -100,7 +118,6 @@ function getTodayWeather(weekWeatherApi) {
             //write current temperature
             writeCurrenTemp(cityData)
 
-
             //write current weather description
             writeCurrentWeaDesc(cityData)
 
@@ -110,10 +127,17 @@ function getTodayWeather(weekWeatherApi) {
         })
 }
 
+//write text that appear in the first page only 
+function writePreloaderText() {
+    document.querySelector(".introPage").innerHTML += `<h2>Weather App</h2>
+<p>5 day forecast for any city</p>`
+}
+
+
 //write the current temperature
 function writeCurrenTemp(cityData) {
     currentTemp = document.querySelectorAll(".current-temp-span")
-    currentTemp[currentTemp.length - 1].textContent = Math.round(cityData["main"]["temp"])
+    currentTemp[currentTemp.length - 1].innerHTML = `${Math.round(cityData["main"]["temp"])}<span>&#8451;</span>`
 }
 
 //write the current weather description
