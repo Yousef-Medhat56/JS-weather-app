@@ -42,7 +42,7 @@ let minTemp
 writePreloaderText()
 
 //Getting the current location coordinates
-navigator.geolocation.getCurrentPosition(allowLocation)
+navigator.geolocation.getCurrentPosition(allowLocation, blockLocation)
 
 //the function called when the user allow the browser to get his current position
 function allowLocation(position) {
@@ -61,8 +61,11 @@ function allowLocation(position) {
         })
 }
 
-
-
+//the function called when the user block the browser from getting his current position
+function blockLocation() {
+    //show the serach bar t allow the user to add new cities
+    document.querySelectorAll(".search-container-div")[document.querySelectorAll(".search-container-div").length - 1].style.visibility = "visible"
+}
 //Functions
 
 //The main function
