@@ -10,8 +10,11 @@ function clickResult(event) {
     //after clicking the result : clear the search bar
     emptySearchBar(searchBarIndex)
 
-    //add new page with the searched city data
-    mainContainer.innerHTML += pageContent
+    /*check if the page isn't the first page after the user blocked the browser from getting his location
+    and if it's the weather data will added to the same page ,and if it isn't a new page will be added */
+    if (!document.querySelector(".introPage")) {
+        mainContainer.innerHTML += pageContent //add new page
+    }
 
     document.querySelector(".spinner-div").style.display = "flex"
 
@@ -35,6 +38,9 @@ function clickResult(event) {
 
     //make the main container transform to the new page after adding it
     mainContainer.style.transform = `translateX(${(document.querySelectorAll(".container").length - 1) * -100 }vw)`
+
+    //remove letters in the search input after clicking the result
+    document.querySelectorAll(".search-bar-container input")[searchBarIndex].value = ""
 
 }
 
