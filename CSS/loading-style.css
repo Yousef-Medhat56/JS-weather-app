@@ -1,0 +1,50 @@
+/*loading spinner and preloader text styles*/
+
+
+/*preloader text*/
+
+.introPage {
+    order: 0;
+    color: var(--white);
+    margin-bottom: 5rem;
+}
+
+.introPage h2 {
+    font-size: 2em;
+    font-weight: 500;
+}
+
+.introPage p {
+    font-size: 1.2em;
+    letter-spacing: 1px;
+}
+
+
+/*hide spinner div*/
+
+.spinner-div {
+    display: none;
+}
+
+
+/*loading spinner */
+
+.spinner {
+    order: 1;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #1f3049;
+    animation: spin 1s ease infinite;
+}
+
+
+/*loading spinner animation*/
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
