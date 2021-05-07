@@ -29,6 +29,8 @@
     height: 100%;
     display: flex;
     align-items: flex-end;
+    /*hide the search bar while loading the page*/
+    visibility: hidden;
 }
 
 .search-bar-container {
