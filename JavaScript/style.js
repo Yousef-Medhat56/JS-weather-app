@@ -164,3 +164,14 @@ let rmPage = event => {
     //reorganize the slide buttons
     showBtn()
 }
+
+//styles after loading weather data : remove loading styles
+function rmloadStyle() {
+    if (document.readyState == "complete") { //if the page is loaded completely
+        document.querySelector(".introPage").remove() //remove preloader text
+        document.querySelector(".spinner-div").remove() //remove loading spinner
+            /*show the search bar 
+            the search bar was hidden to prevent the user from searching a new city before loading the page */
+        document.querySelectorAll(".search-container-div")[document.querySelectorAll(".search-container-div").length - 1].style.visibility = "visible"
+    }
+}
