@@ -127,6 +127,9 @@ let rmPage = event => {
     let pageIndex = (Array.from(document.getElementsByClassName(`${event.target.className}`))).indexOf(event.target)
 
 
+    //return the deleted city to the search results
+    returnRemovedResult(pageIndex)
+
     //control the transition duration of the main container 
     let ctrlTransDur = () => {
 
@@ -173,6 +176,8 @@ function rmloadStyle() {
             /*show the search bar 
             the search bar was hidden to prevent the user from searching a new city before loading the page */
         document.querySelectorAll(".search-container-div")[document.querySelectorAll(".search-container-div").length - 1].style.visibility = "visible"
+
+        //show the weather forecast
         document.querySelectorAll(".weather-forecast")[document.querySelectorAll(".weather-forecast").length - 1].style.display = "flex"
     }
 }
