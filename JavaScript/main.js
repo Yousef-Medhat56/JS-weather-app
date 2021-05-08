@@ -58,6 +58,9 @@ function allowLocation(position) {
 
             //call the main function
             collectWeatherData(data)
+
+            //remove the current city from search results
+            rmCurrntLocation(data)
         })
 }
 
