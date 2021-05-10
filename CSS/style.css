@@ -45,8 +45,8 @@
 .today-weather-section {
     order: 1;
     width: 100%;
-    height: 55vh;
-    margin: 5% auto;
+    height: 57vh;
+    margin: 4% auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,6 +58,7 @@
 .today-weather {
     width: 75%;
     height: 100%;
+    padding: 10px 0;
     background-color: rgb(255, 255, 255, 0.1);
     box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -93,7 +94,7 @@
 /*location | icon and city name*/
 
 .location-div h3 {
-    font-size: 2.1em;
+    font-size: 2em;
     font-weight: 550;
     color: var(--white)
 }
@@ -128,7 +129,7 @@
     width: 100%;
     height: 100%;
     color: var(--white);
-    font-size: 5em;
+    font-size: 7.5em;
 }
 
 
@@ -222,6 +223,7 @@
     height: 22vh;
     width: 100%;
     margin-bottom: 3%;
+    /*hide the weather forecast until loading the page*/
     display: none;
     align-items: center;
     justify-content: center;
@@ -339,5 +341,75 @@
     }
     .weekday-weather .weekday-weather-icon div i {
         font-size: 2em;
+    }
+    .today-weather-icon i {
+        font-size: 7em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .today-weather-section button {
+        width: 7%;
+    }
+    .today-weather-section button i {
+        font-size: 1.4em;
+    }
+    .search-container div:nth-child(2) {
+        width: 80%
+    }
+    .today-weather-icon i {
+        font-size: 6em;
+    }
+    .location-div h3 {
+        font-size: 1.5em;
+    }
+    .today-date {
+        font-size: 1.2em;
+    }
+    .today-weather-desc {
+        font-size: 1.5em;
+    }
+    .today-weather-temp {
+        font-size: 1.1em;
+    }
+    ul li {
+        font-size: 0.8em;
+    }
+    .search-container div div i {
+        font-size: 0.9em;
+    }
+    .search-container button i {
+        font-size: 1.1em;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .today-weather-section {
+        height: 50vh;
+        margin: 10% auto;
+    }
+    .search-container div:nth-child(2) {
+        width: 100%
+    }
+    .today-weather-icon i {
+        font-size: 5em;
+    }
+    .location-div h3 {
+        font-size: 1.2em;
+    }
+    .today-date {
+        font-size: 1em;
+    }
+    .today-weather-desc {
+        font-size: 1.3em;
+    }
+    .today-weather-temp {
+        font-size: 0.9em;
+    }
+    ul li {
+        font-size: 0.8em;
+    }
+    .weather-forecast {
+        height: 25%;
     }
 }
