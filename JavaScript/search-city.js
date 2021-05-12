@@ -40,6 +40,9 @@ let makeJsonArr = () => {
                     `${citiesArr[x]} - ${countriesArr[x]}`) //else : DON'T write the state name
 
         }
+        console.log(availableResults.length)
+        console.log(new Set(availableResults).size)
+        console.log(new Set(citiesArr).size)
     })
 }
 
@@ -51,8 +54,9 @@ let makeResultsArr = (index) => { //index : the page index
     //filtering the cities array to make choices array
     if (document.querySelectorAll(".search-bar-container input")[index].value.length > 0) {
 
-        //search the results that start with the entered letters if
-        resultsArr = availableResults.filter(value => (value.toLowerCase()).startsWith(document.querySelectorAll(".search-bar-container input")[index].value.toLowerCase()))
+        /*Make array for results that  match with the search input,
+         after removing the repeated elements in it by converting it to SET then ARRAY*/
+        resultsArr = new Array(...new Set(availableResults.filter(value => (value.toLowerCase()).startsWith(document.querySelectorAll(".search-bar-container input")[index].value.toLowerCase()))))
     }
 
 }
