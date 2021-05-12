@@ -62,24 +62,39 @@ function fetchResult(event) {
 
 //remove the clicked results from the results array and add them to the rmResultsArr Arr
 function rmClickedResult(event) {
+    //index of the clicked search result in the available results array 
+    let rmIndex = availableResults.indexOf(event.target.innerHTML)
+
     //push the clicked results to a new array
     rmResultsArr.push(availableResults[availableResults.indexOf(event.target.innerHTML)])
 
     //push the cliked city into a new array
-    rmCitiesArr.push(citiesArr[availableResults.indexOf(event.target.innerHTML)])
+    rmCitiesArr.push(citiesArr[rmIndex])
 
     //push the cliked country into a new array
-    rmCountriesArr.push(countriesArr[availableResults.indexOf(event.target.innerHTML)])
+    rmCountriesArr.push(countriesArr[rmIndex])
 
     //push the cliked state into a new array
-    rmStatesArr.push(statesArr[availableResults.indexOf(event.target.innerHTML)])
+    rmStatesArr.push(statesArr[rmIndex])
 
 
-    citiesArr.splice(availableResults.indexOf(event.target.innerHTML), 1) //remove the clicked result from city array
-    countriesArr.splice(availableResults.indexOf(event.target.innerHTML), 1) //remove the clicked result from countries array
-    statesArr.splice(availableResults.indexOf(event.target.innerHTML), 1) //remove the clicked result from states array
-    availableResults.splice(availableResults.indexOf(event.target.innerHTML), 1) //remove the clicked result from the available results array
+    citiesArr.splice(rmIndex, 1) //remove the clicked result from city array
+    countriesArr.splice(rmIndex, 1) //remove the clicked result from countries array
+    statesArr.splice(rmIndex, 1) //remove the clicked result from states array
+    availableResults.splice(rmIndex, 1) //remove the clicked result from the available results array
+    rmRepeatedResults()
+}
 
+//remove repeated elements in the available results array like: paris - FR and Dubai - AE
+function rmRepeatedResults() {
+    //asign the value of the last clicked city to a new element
+    let lastClickedResult = rmResultsArr[rmResultsArr.length - 1]
+    while (availableResults.includes(lastClickedResult)) { //while the clicked city is repeated in the available results array
+        citiesArr.splice(availableResults.indexOf(lastClickedResult), 1) //remove it from cities array
+        countriesArr.splice(availableResults.indexOf(lastClickedResult), 1) //remove it from countris array
+        statesArr.splice(availableResults.indexOf(lastClickedResult), 1) //remove it from states array
+        availableResults.splice(availableResults.indexOf(lastClickedResult), 1) //remove it from available results array
+    }
 }
 
 //if the city is deleted return the city again into search results
