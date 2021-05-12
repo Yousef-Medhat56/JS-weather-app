@@ -61,6 +61,9 @@ function allowLocation(position) {
 
             //remove the current city from search results
             rmCurrntLocation(data)
+
+            //check if there the current city is repeated in the available search results and delete it
+            rmRepeatedResults()
         })
 }
 
@@ -158,10 +161,10 @@ function showCurrenIcon(cityData) {
     curWeatherIcon[curWeatherIcon.length - 1].innerHTML = `<div><i class = "wi wi-owm-${cityData["weather"][0]["id"]}"></i></div>`
 }
 
-//write the city name
+//write the city and country name
 function writeCityName(weekWeatherApi) {
     locationName = document.querySelectorAll(".location-name")
-    locationName[locationName.length - 1].textContent = weekWeatherApi.city.name
+    locationName[locationName.length - 1].textContent = `${weekWeatherApi.city.name} - ${weekWeatherApi.city.country}`
 }
 
 
