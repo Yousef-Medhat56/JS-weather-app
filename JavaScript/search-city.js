@@ -22,7 +22,7 @@ let searchBarIndex
 //make array for all the cities on the json file
 let makeJsonArr = () => {
     //call the json file
-    fetch(`../json/city-names.json`).then(response => response.json()).then(data => {
+    fetch('./json/city-names.json').then(response => response.json()).then(data => {
         for (let x = 0; x < data.length; x++) {
 
             //make array for cities names only
@@ -40,9 +40,7 @@ let makeJsonArr = () => {
                     `${citiesArr[x]} - ${countriesArr[x]}`) //else : DON'T write the state name
 
         }
-        console.log(availableResults.length)
-        console.log(new Set(availableResults).size)
-        console.log(new Set(citiesArr).size)
+
     })
 }
 
