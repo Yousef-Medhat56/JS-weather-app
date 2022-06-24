@@ -25,7 +25,7 @@
     position: relative;
     justify-self: flex-end;
     order: 1;
-    width: 50%;
+    width: 60%;
     height: 100%;
     display: flex;
     align-items: flex-end;
@@ -158,7 +158,8 @@
     color: var(--white)
 }
 
-.delete-button-conatainer .delete-button i {
+.delete-button i {
+    display: block;
     font-size: 1.7em;
     background-color: transparent;
 }

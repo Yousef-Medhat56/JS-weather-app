@@ -20,7 +20,7 @@
 /*the background of any element if it is selected*/
 
 *::selection {
-    background-color: var(--dark-blue)
+    background-color: var(--light-blue)
 }
 
 
