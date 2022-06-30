@@ -20,13 +20,13 @@ let searchBarIndex
 
 
 //fetch cities
-const fetchCities = fetch('/DATA/cities.txt').then(response => response.text()).then(data => { return data.split(",") })
+const fetchCities = fetch('https://raw.githubusercontent.com/Yousef-Medhat56/JS-weather-app/main/DATA/cities.txt').then(response => response.text()).then(data => { return data.split(",") })
 
 //fetch countries
-const fetchCountries = fetch('/DATA/countries.txt').then(response => response.text()).then(data => { return data.split(",") })
+const fetchCountries = fetch('https://raw.githubusercontent.com/Yousef-Medhat56/JS-weather-app/main/DATA/countries.txt').then(response => response.text()).then(data => { return data.split(",") })
 
 //fetch states
-const fetchStates = fetch('/DATA/states.txt').then(response => response.text()).then(data => { return data.split(",") })
+const fetchStates = fetch('https://raw.githubusercontent.com/Yousef-Medhat56/JS-weather-app/main/DATA/states.txt').then(response => response.text()).then(data => { return data.split(",") })
 
 
 //make array of search results that appear for the user 
@@ -57,8 +57,9 @@ Promise.all([fetchCities, fetchCountries, fetchStates]).then(results => {
         availableResults.push((statesArr[x]) ? //if the city has a state name
                 `${citiesArr[x]}, ${statesArr[x]} - ${countriesArr[x]}` : //write the state name in the result 
                 `${citiesArr[x]} - ${countriesArr[x]}`) //else : DON'T write the state name
-    }})
-    
+    }
+})
+
 //page styles if the search bar is empty
 function emptySearchBar(index) { //index : the page index
 
