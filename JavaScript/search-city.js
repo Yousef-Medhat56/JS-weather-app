@@ -18,33 +18,36 @@ let resultsArr = []
 //the index of the search bar
 let searchBarIndex
 
+//fetch cities
+const fetchCities = fetch('/DATA/cities.txt').then(response => response.text()).then(data => { return data.split(",") })
 
-//make array for all the cities on the json file
-let makeJsonArr = () => {
-    //call the json file
-    fetch('city-names.json').then(response => response.json()).then(data => {
-        for (let x = 0; x < data.length; x++) {
 
-            //make array for cities names only
-            citiesArr.push(`${data[x]["name"]}`)
+//fetch countries
+const fetchCountries = fetch('/DATA/countries.txt').then(response => response.text()).then(data => { return data.split(",") })
 
-            //make array for countries names only
-            countriesArr.push(`${data[x]["country"]}`)
+//fetch states
+const fetchStates = fetch('/DATA/states.txt').then(response => response.text()).then(data => { return data.split(",") })
 
-            //make array for states names only
-            statesArr.push(`${data[x]["state"]}`)
 
-            //combine the cities, countries and states in one array
-            availableResults.push((statesArr[x]) ? //if the city has a state name
-                    `${citiesArr[x]}, ${statesArr[x]} - ${countriesArr[x]}` : //write the state name in the result 
-                    `${citiesArr[x]} - ${countriesArr[x]}`) //else : DON'T write the state name
+Promise.all([fetchCities, fetchCountries, fetchStates]).then(results => {
+    //make array for cities names only
+    citiesArr = results[0]
 
-        }
+    //make array for countries names only
+    countriesArr = results[1]
 
-    })
-}
+    //make array for states names only
+    statesArr = results[2]
 
-makeJsonArr() //make arrays for all the cities& countriesin& states in (city-names.json)
+
+    //combine the cities, countries and states in one array
+    for (x in citiesArr) {
+        availableResults.push((statesArr[x]) ? //if the city has a state name
+                `${citiesArr[x]}, ${statesArr[x]} - ${countriesArr[x]}` : //write the state name in the result 
+                `${citiesArr[x]} - ${countriesArr[x]}`) //else : DON'T write the state name
+    }
+
+})
 
 //make array of search results that appear for the user 
 let makeResultsArr = (index) => { //index : the page index
